@@ -1,10 +1,4 @@
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static javax.swing.UIManager.put;
-import static sun.swing.MenuItemLayoutHelper.max;
 
 public class LeetCodeSolutions {
 
@@ -12,8 +6,8 @@ public class LeetCodeSolutions {
     class Solution1 {
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-            for(int i = 0; i < nums.length; i++){
-                if(map.containsKey(target - nums[i])){
+            for (int i = 0; i < nums.length; i++) {
+                if (map.containsKey(target - nums[i])) {
                     return new int[]{i, map.get(target - nums[i])};
                 }
                 map.put(nums[i], i);
@@ -27,14 +21,14 @@ public class LeetCodeSolutions {
             int start = 0;
             int end = height.length - 1;
             int maxSize = 0;
-            while(start < end){
-                int size = (end - start) * Math.min(height[start],height[end]);
-                if(size > maxSize){
+            while (start < end) {
+                int size = (end - start) * Math.min(height[start], height[end]);
+                if (size > maxSize) {
                     maxSize = size;
                 }
-                if(height[start] >= height[end]){
+                if (height[start] >= height[end]) {
                     end--;
-                }else{
+                } else {
                     start++;
                 }
             }
@@ -76,13 +70,13 @@ public class LeetCodeSolutions {
                 }
             }
             return result;
-    }
+        }
 
         class Solution16 {
             public int threeSumClosest(int[] nums, int target) {
                 Arrays.sort(nums);
                 int len = nums.length;
-                for(int i = 0; i < len; i++){
+                for (int i = 0; i < len; i++) {
 
                 }
             }
