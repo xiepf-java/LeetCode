@@ -72,14 +72,14 @@ public class LeetCodeSolutions {
             return result;
         }
 
-        class Solution16 {
-            public int threeSumClosest(int[] nums, int target) {
-                Arrays.sort(nums);
-                int len = nums.length;
-                for (int i = 0; i < len; i++) {
-
-                }
-            }
-        }
+//        class Solution16 {
+//            public int threeSumClosest(int[] nums, int target) {
+//                Arrays.sort(nums);
+//                int len = nums.length;
+//                for (int i = 0; i < len; i++) {
+//                }
+//            }
+//        }
+//    }
     }
 }
