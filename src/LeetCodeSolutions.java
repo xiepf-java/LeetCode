@@ -72,14 +72,32 @@ public class LeetCodeSolutions {
             return result;
         }
 
-//        class Solution16 {
-//            public int threeSumClosest(int[] nums, int target) {
-//                Arrays.sort(nums);
-//                int len = nums.length;
-//                for (int i = 0; i < len; i++) {
-//                }
-//            }
-//        }
-//    }
+        class Solution16 {
+            public int threeSumClosest(int[] nums, int target) {
+                Arrays.sort(nums);
+                int len = nums.length;
+                //不能赋int MaxValue 会产生越界 默认值最好设为某个可能解
+                int min = nums[0] + nums[1] + nums[len-1];
+                for (int i = 0; i < len - 2; i++) {
+                    int curNum = nums[i];
+                    int left = i + 1;
+                    int right = len - 1;
+                    while (left < right) {
+                        int total = curNum + nums[left] + nums[right];
+                        if (Math.abs(target - total) < Math.abs(target - min)) {
+                            min = total;
+                        }
+                        if (total > target) {
+                            right--;
+                        } else if(total < target){
+                            left++;
+                        }else{
+                            return min;
+                        }
+                    }
+                }
+                return min;
+            }
+        }
     }
 }
