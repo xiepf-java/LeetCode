@@ -182,6 +182,83 @@ public class Array {
         }
     }
 
+    class Solution26 {
+        public int removeDuplicates(int[] nums) {
+            if(nums == null || nums.length == 0){
+                return 0;
+            }
+            int curPos = 1;
+            for(int i = 1; i < nums.length; i++){
+                if(nums[i] != nums[curPos-1]){
+                    nums[curPos] = nums[i];
+                    curPos++;
+                }
+            }
+            return curPos;
+        }
+    }
+
+    class Solution27 {
+        public int removeElement(int[] nums, int val) {
+            if(nums == null || nums.length == 0){
+                return 0;
+            }
+            int curPos = 0;
+            for(int i = 0; i < nums.length; i++){
+                if(nums[i] != val){
+                    nums[curPos] = nums[i];
+                    curPos++;
+                }
+            }
+            return curPos;
+        }
+    }
+
+     class Solution39 {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            Arrays.sort(candidates);
+            dfs(candidates, 0, target);
+            return ans;
+        }
+
+        public void dfs(int[] candidates, int begin, int target){
+            if(target == 0){
+                ans.add(new ArrayList<>(list));
+                return;
+            }
+            for(int i = begin; i < candidates.length && candidates[i] <= target; i++){
+                list.add(candidates[i]);
+                dfs(candidates, i, target-candidates[i]);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    class Solution40 {
+        List<Integer> list = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+            Arrays.sort(candidates);
+            dfs(candidates, 0, target);
+            return ans;
+        }
+        public void dfs(int[] candidates, int begin, int target){
+            if(target == 0){
+                ans.add(new ArrayList<>(list));
+                return;
+            }
+            for(int i = begin; i < candidates.length && candidates[i] <= target; i++){
+                if(i > begin && candidates[i] == candidates[i-1]){
+                    continue;
+                }
+                list.add(candidates[i]);
+                dfs(candidates, i + 1, target - candidates[i]);
+                list.remove(list.size()-1);
+            }
+        }
+    }
 
 
 
