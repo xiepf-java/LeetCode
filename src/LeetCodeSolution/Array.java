@@ -260,6 +260,68 @@ public class Array {
         }
     }
 
+    class Solution41 {
+        public int firstMissingPositive(int[] nums) {
+            int len = nums.length;
+            for(int i = 0; i < len; i++){
+                while(nums[i] > 0 && nums[i] <= len && nums[nums[i] - 1] != nums[i]){
+                    swap(nums, i, nums[i] - 1);
+                }
+            }
+            for(int i = 0; i < len; i++){
+                if(nums[i] != i + 1){
+                    return i + 1;
+                }
+            }
+            return len + 1;
+        }
+
+        public void swap(int[] nums, int i, int j){
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+        }
+    }
+
+    class Solution42dp {
+        public int trap(int[] height) {
+            int n = height.length;
+            int[][] dp = new int[n][2];
+            dp[0][0] = height[0];
+            dp[n-1][1] = height[n-1];
+            for(int i = 1; i < n; i++){
+                dp[i][0] = Math.max(dp[i-1][0], height[i]);
+            }
+            for(int i = n - 2; i >= 0; i--){
+                dp[i][1] = Math.max(dp[i+1][1], height[i]);
+            }
+            int ans = 0;
+            for(int i = 1; i < n-1; i++){
+                ans += Math.min(dp[i][0], dp[i][1]) - height[i];
+            }
+            return ans;
+        }
+    }
+
+    class Solution42point {
+        public int trap(int[] height) {
+            int leftMax = 0;
+            int rightMax = 0;
+            int left = 0;
+            int right = height.length - 1;
+            int ans = 0;
+            while(left <= right){
+                if(leftMax < rightMax){
+                    leftMax = Math.max(leftMax, height[left]);
+                    ans += leftMax - height[left++];
+                }else{
+                    rightMax = Math.max(rightMax, height[right]);
+                    ans += rightMax - height[right--];
+                }
+            }
+            return ans;
+        }
+    }
 
 
 
