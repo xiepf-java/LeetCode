@@ -323,6 +323,94 @@ public class Array {
         }
     }
 
+    class Solution46 {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        public List<List<Integer>> permute(int[] nums) {
+            boolean[] used = new boolean[nums.length];
+            dfs(nums, used);
+            return ans;
+        }
+        public void dfs(int[] nums, boolean[] used){
+            if(list.size() == nums.length){
+                ans.add(new ArrayList<>(list));
+                return;
+            }
+            for(int i = 0; i < nums.length; i++){
+                if(!used[i]){
+                    used[i] = true;
+                    list.add(nums[i]);
+                    dfs(nums, used);
+                    used[i] = false;
+                    list.remove(list.size()-1);
+                }
+            }
+        }
+    }
+
+    class Solution47 {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        public List<List<Integer>> permuteUnique(int[] nums) {
+            Arrays.sort(nums);
+            boolean[] used = new boolean[nums.length];
+            dfs(nums, used, 0);
+            return ans;
+        }
+        public void dfs(int[] nums, boolean[] used,int index){
+            if(index == nums.length){
+                ans.add(new ArrayList<>(list));
+                return;
+            }
+            for(int i = 0; i < nums.length; i++){
+                if(used[i] || i != 0 && nums[i] == nums[i-1] && !used[i-1]){
+                    continue;
+                }
+                used[i] = true;
+                list.add(nums[i]);
+                dfs(nums, used, index + 1);
+                used[i] = false;
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    class Solution48 {
+        public void rotate(int[][] matrix) {
+            int n = matrix.length;
+            //沿对角线翻转
+            for(int i = 0; i < n; i++){
+                for(int j = i+1; j < n; j++){
+                    int tmp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = tmp;
+                }
+            }
+            //沿中线翻转
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n/2; j++){
+                    int tmp = matrix[i][j];
+                    matrix[i][j] = matrix[i][n-j-1];
+                    matrix[i][n-j-1] = tmp;
+                }
+            }
+        }
+    }
+
+    class Solution53 {
+        public int maxSubArray(int[] nums) {
+            int preMax = 0;
+            int ans = nums[0];
+            for (int num : nums) {
+                preMax = Math.max(num, preMax + num);
+                ans = Math.max(preMax, ans);
+            }
+            return ans;
+        }
+    }
+
+
+
 
 
 
